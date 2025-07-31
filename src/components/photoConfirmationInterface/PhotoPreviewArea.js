@@ -25,6 +25,31 @@ export default function PhotoCapture() {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
   };
+  const handleSubmitPhotos = async () => {
+    try {
+      for (const photo of photos) {
+        const response = await fetch("/api/save-photo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            image: photo.src,
+            tag: photo.tag,
+          }),
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || "Upload failed");
+
+        console.log("Saved:", result.fileUrl);
+      }
+
+      alert("Все фото успешно сохранены!");
+      setPhotos([]);
+    } catch (error) {
+      console.error("Error saving photos:", error);
+      alert("Ошибка при сохранении фото.");
+    }
+  };
 
   const startCamera = async () => {
     if (!streaming && typeof window !== "undefined") {
@@ -206,7 +231,7 @@ export default function PhotoCapture() {
       {totalLimitReached && (
         <div className="w-full px-4 mt-4">
           <button
-            onClick={() => alert("Submitting photos...")}
+            onClick={handleSubmitPhotos}
             className="w-full py-3 bg-green-600 text-white rounded-lg text-sm font-bold shadow-md hover:bg-green-700 transition-all"
           >
             ОТПРАВИТЬ ФОТО

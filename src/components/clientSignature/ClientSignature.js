@@ -11,14 +11,46 @@ export default function ClientSignature() {
     sigCanvas.current.clear();
     setSavedSignature(null);
   };
-
-  const saveSignature = () => {
+  // I will change this code
+  // const saveSignature = () => {
+  //   if (!sigCanvas.current.isEmpty()) {
+  //     const dataUrl = sigCanvas.current
+  //       .getTrimmedCanvas()
+  //       .toDataURL("image/png");
+  //     setSavedSignature(dataUrl);
+  //     alert("Подпись сохранена!");
+  //   } else {
+  //     alert("Пожалуйста, подпишитесь сначала.");
+  //   }
+  // };
+  const saveSignature = async () => {
     if (!sigCanvas.current.isEmpty()) {
       const dataUrl = sigCanvas.current
         .getTrimmedCanvas()
         .toDataURL("image/png");
-      setSavedSignature(dataUrl);
-      alert("Подпись сохранена!");
+
+      try {
+        const response = await fetch("../../api/save-signature", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            signature: dataUrl,
+            timestamp: new Date().toISOString(),
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) throw new Error(result.error || "Upload failed");
+
+        setSavedSignature(dataUrl);
+        alert("Подпись сохранена!");
+
+        console.log("Saved to:", result.fileUrl);
+      } catch (err) {
+        console.error(err);
+        alert("Ошибка при сохранении подписи.");
+      }
     } else {
       alert("Пожалуйста, подпишитесь сначала.");
     }
