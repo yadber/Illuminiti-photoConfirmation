@@ -152,17 +152,21 @@ export default function Reservation() {
         {confirmed && (
           <div className="fixed inset-0 bg-gray-200 bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-sm text-center border-black border-2 ">
-              <h1 className="text-6xl flex justify-center text-green-500 mb-5">
+              <h1 className="text-6xl flex justify-center text-green-600 mb-5">
                 <FaCheckCircle />
               </h1>
               <h2 className="text-xl font-bold text-black ">
                 Your reservation is
               </h2>
               <h2 className="text-xl font-bold text-black mb-5">confirmed!</h2>
-              <p className="text-gray-800 mb-4">
-                {time} | {getDayLabel()} | {people}{" "}
-                {people === "1" ? "Person" : "People"}
-              </p>
+              <div className="mb-4 flex flex-col gap-2">
+                <p className=" border-b border-b-gray-400"> </p>
+                <p className="text-gray-800 ">
+                  <strong> {time}</strong> | {getDayLabel()} | {people}{" "}
+                  {people === "1" ? "Person" : "People"}
+                </p>
+                <p className="border-t border-t-gray-400"> </p>
+              </div>
               <button
                 onClick={() => setConfirmed(false)}
                 className="mt-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-900"
