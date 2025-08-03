@@ -158,7 +158,7 @@ export default function Reservation() {
               <h2 className="text-xl font-bold text-black ">
                 Your reservation is
               </h2>
-              <h2 className="text-xl font-bold text-black mb-5">confirmed</h2>
+              <h2 className="text-xl font-bold text-black mb-5">confirmed!</h2>
               <p className="text-gray-800 mb-4">
                 {time} | {getDayLabel()} | {people}{" "}
                 {people === "1" ? "Person" : "People"}
