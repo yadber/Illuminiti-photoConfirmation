@@ -3,12 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import Image from "next/image";
-import ClientSignature from "../clientSignature/ClientSignature";
+import { useRouter } from "next/navigation";
+
 export default function PhotoCapture() {
   const [selectedOption, setSelectedOption] = useState("before");
   const [photos, setPhotos] = useState([]);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const router = useRouter();
   const [streaming, setStreaming] = useState(false);
   const streamRef = useRef(null);
   const [cameraReady, setCameraReady] = useState(false);
@@ -123,6 +125,11 @@ export default function PhotoCapture() {
     }
   };
 
+  const handleBack = () => {
+    stopCamera();
+    router.back();
+  };
+
   useEffect(() => {
     return () => {
       stopCamera();
@@ -134,7 +141,7 @@ export default function PhotoCapture() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-start relative transition-colors duration-300">
+    <div className="min-h-screen max-w-md w-full mx-auto bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center px-4">
       {/* Top Circles + Parent Header just because i see it in the screenshot */}
       <div className="w-full flex flex-col items-center">
         <div className="flex justify-center gap-4 pt-4">
@@ -146,7 +153,7 @@ export default function PhotoCapture() {
         <div className="w-full flex items-center bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-800 text-white px-4 py-3 rounded-b-xl mt-2">
           <button
             className="w-10 h-10 flex items-center justify-center text-xl bg-blue-300 rounded-full mr-8"
-            onClick={stopCamera}
+            onClick={() => handleBack()}
           >
             ⬅
           </button>
@@ -264,7 +271,6 @@ export default function PhotoCapture() {
           </div>
         ))}
       </div>
-      <ClientSignature />
     </div>
   );
 }

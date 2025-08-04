@@ -2,27 +2,16 @@
 import { useRef, useState } from "react";
 import SignaturePad from "react-signature-canvas";
 import { BsArrowLeft } from "react-icons/bs";
+import { useRouter } from "next/navigation";
 
 export default function ClientSignature() {
   const sigCanvas = useRef(null);
   const [savedSignature, setSavedSignature] = useState(null);
-
+  const router = useRouter();
   const clearSignature = () => {
     sigCanvas.current.clear();
     setSavedSignature(null);
   };
-  // I will change this code
-  // const saveSignature = () => {
-  //   if (!sigCanvas.current.isEmpty()) {
-  //     const dataUrl = sigCanvas.current
-  //       .getTrimmedCanvas()
-  //       .toDataURL("image/png");
-  //     setSavedSignature(dataUrl);
-  //     alert("Подпись сохранена!");
-  //   } else {
-  //     alert("Пожалуйста, подпишитесь сначала.");
-  //   }
-  // };
   const saveSignature = async () => {
     if (!sigCanvas.current.isEmpty()) {
       const dataUrl = sigCanvas.current
@@ -57,9 +46,13 @@ export default function ClientSignature() {
   };
 
   return (
-    <div className="min-h-screen mt-20 w-full bg-gray-100 dark:bg-gray-900 flex flex-col items-center py-4 px-6 transition-colors duration-300">
-      <div className="w-full flex items-center bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-800 text-white px-4 py-3 rounded-b-xl mb-4">
-        <button className="w-10 h-10 flex items-center justify-center text-xl bg-blue-300 rounded-full mr-8">
+    <div className="min-h-screen max-w-md w-full mx-auto bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center px-4">
+      {/* Header */}
+      <div className="w-full flex items-center bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-800 text-white px-4 py-3 rounded-b-xl mb-6">
+        <button
+          className="w-10 h-10 flex items-center justify-center text-xl bg-blue-300 rounded-full mr-8"
+          onClick={() => router.back()}
+        >
           ⬅
         </button>
         <h1 className="text-lg font-semibold">Подпись клиента</h1>
@@ -88,7 +81,7 @@ export default function ClientSignature() {
         </p>
       </div>
 
-      {/* Confirm Text */}
+      {/* Confirm Checkbox */}
       <div className="mb-4 w-full">
         <button
           disabled
@@ -114,9 +107,9 @@ export default function ClientSignature() {
         </button>
       </div>
 
-      {/* Preview Saved Signature (optional) I can use Image of the next.js*/}
+      {/* Saved Signature Preview */}
       {savedSignature && (
-        <div className="mt-4 w-full">
+        <div className="mt-6 w-full">
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
             Предпросмотр подписи:
           </p>

@@ -1,12 +1,11 @@
 import Head from "next/head";
-// import PhotoCapture from "../components/photoConfirmationInterface/PhotoPreviewArea";
-import Reservation from "../components/reservation/Reservation";
+
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
     <>
-      {/* <PhotoCapture /> */}
-      <Reservation />
+      <LoginPage />
     </>
   );
 }
