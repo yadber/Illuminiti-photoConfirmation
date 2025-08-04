@@ -99,7 +99,7 @@ export default function Reservation() {
               >
                 {time || "Select"}
                 {showTimeDropdown && (
-                  <div className="absolute top-[-100%] left-0 w-1/3 bg-white dark:bg-gray-800 border border-black dark:border-white text-xs rounded-md shadow z-20">
+                  <div className="absolute top-[-100% px] left-0 w-1/3 bg-white dark:bg-gray-800 border border-black dark:border-white text-xs rounded-md shadow z-20">
                     {times.map((t) => (
                       <div
                         key={t}
@@ -141,7 +141,7 @@ export default function Reservation() {
               >
                 {people || "Select"}
                 {showPeopleDropdown && (
-                  <div className="absolute top-[-100%] right-0 w-1/3 bg-white dark:bg-gray-800 border border-black dark:border-white rounded-md shadow z-20">
+                  <div className="absolute top-[-100% px] right-0 w-1/3 bg-white dark:bg-gray-800 border border-black dark:border-white rounded-md shadow z-20">
                     {peopleOptions.map((num) => (
                       <div
                         key={num}
