@@ -46,80 +46,82 @@ export default function ClientSignature() {
   };
 
   return (
-    <div className="min-h-screen max-w-md w-full mx-auto bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center px-4">
-      {/* Header */}
-      <div className="w-full flex items-center bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-800 text-white px-4 py-3 rounded-b-xl mb-6">
-        <button
-          className="w-10 h-10 flex items-center justify-center text-xl bg-blue-300 rounded-full mr-8"
-          onClick={() => router.back()}
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="min-h-fit max-w-md w-full mx-auto bg-gray-100 dark:bg-gray-900 flex flex-col items-center justify-center px-4">
+        {/* Header */}
+        <div className="w-full flex items-center bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-600 dark:to-blue-800 text-white px-4 py-3 rounded-b-xl mb-6">
+          <button
+            className="w-10 h-10 flex items-center justify-center text-xl bg-blue-300 rounded-full mr-8"
+            onClick={() => router.back()}
+          >
+            ⬅
+          </button>
+          <h1 className="text-lg font-semibold">Подпись клиента</h1>
+        </div>
+
+        {/* Signature Canvas */}
+        <div
+          className="w-full bg-white dark:bg-gray-700 rounded-xl overflow-hidden mb-4"
+          style={{ height: 250 }}
         >
-          ⬅
-        </button>
-        <h1 className="text-lg font-semibold">Подпись клиента</h1>
-      </div>
-
-      {/* Signature Canvas */}
-      <div
-        className="w-full bg-white dark:bg-gray-700 rounded-xl overflow-hidden mb-4"
-        style={{ height: 250 }}
-      >
-        <SignaturePad
-          ref={sigCanvas}
-          canvasProps={{ className: "w-full h-full" }}
-          backgroundColor="transparent"
-          penColor="#000"
-        />
-      </div>
-
-      {/* Instructions */}
-      <div className="text-center mb-4">
-        <h2 className="text-md font-semibold text-gray-800 dark:text-white">
-          Получите подпись клиента
-        </h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-          Попросите клиента расписаться в получении груза
-        </p>
-      </div>
-
-      {/* Confirm Checkbox */}
-      <div className="mb-4 w-full">
-        <button
-          disabled
-          className="w-full py-2 px-4 bg-gray-200 dark:bg-gray-800 dark:text-white text-gray-700 rounded-lg text-sm font-medium shadow-inner"
-        >
-          Я подтверждаю получение груза
-        </button>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-4 w-full">
-        <button
-          onClick={clearSignature}
-          className="flex-1 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg font-semibold"
-        >
-          ОЧИСТИТЬ
-        </button>
-        <button
-          onClick={saveSignature}
-          className="flex-1 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
-        >
-          СОХРАНИТЬ
-        </button>
-      </div>
-
-      {/* Saved Signature Preview */}
-      {savedSignature && (
-        <div className="mt-6 w-full">
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
-            Предпросмотр подписи:
-          </p>
-          <img
-            src={savedSignature}
-            alt="Saved signature"
-            className="w-full border rounded"
+          <SignaturePad
+            ref={sigCanvas}
+            canvasProps={{ className: "w-full h-full" }}
+            backgroundColor="transparent"
+            penColor="#000"
           />
         </div>
-      )}
+
+        {/* Instructions */}
+        <div className="text-center mb-4">
+          <h2 className="text-md font-semibold text-gray-800 dark:text-white">
+            Получите подпись клиента
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            Попросите клиента расписаться в получении груза
+          </p>
+        </div>
+
+        {/* Confirm Checkbox */}
+        <div className="mb-4 w-full">
+          <button
+            disabled
+            className="w-full py-2 px-4 bg-gray-200 dark:bg-gray-800 dark:text-white text-gray-700 rounded-lg text-sm font-medium shadow-inner"
+          >
+            Я подтверждаю получение груза
+          </button>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-4 w-full">
+          <button
+            onClick={clearSignature}
+            className="flex-1 py-2 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white rounded-lg font-semibold"
+          >
+            ОЧИСТИТЬ
+          </button>
+          <button
+            onClick={saveSignature}
+            className="flex-1 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+          >
+            СОХРАНИТЬ
+          </button>
+        </div>
+
+        {/* Saved Signature Preview */}
+        {savedSignature && (
+          <div className="mt-6 w-full">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+              Предпросмотр подписи:
+            </p>
+            <img
+              src={savedSignature}
+              alt="Saved signature"
+              className="w-full border rounded"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
